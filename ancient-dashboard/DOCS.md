@@ -1,54 +1,65 @@
-# Ancient Home Assistant installeren
+# Installing Ancient Home Assistant
 
-Vereist Home Assistant OS met de app-/add-onwinkel, internet voor de installatie
-en een 64-bits apparaat. Raspberry Pi 5 wordt ondersteund via `aarch64`.
-Deze experimentele verpakking is nog niet op een echte Supervisor-installatie getest.
+Requires Home Assistant OS with the app/add-on store, internet access during
+installation, and a 64-bit device. Raspberry Pi 5 uses the `aarch64` architecture.
+Initial installation and operation have been confirmed on Raspberry Pi 5.
 
-1. Publiceer deze repository op GitHub (de map `ancient-dashboard` moet erin staan).
-2. Open **Instellingen → Apps → Appwinkel** (of **Add-ons → Add-onwinkel**).
-3. Kies **⋮ → Repositories** en voeg toe:
+1. Publish this repository on GitHub, including the `ancient-dashboard` directory.
+2. Open **Settings → Apps → App store** (or **Add-ons → Add-on store**).
+3. Select **⋮ → Repositories** and add:
    `https://github.com/Kwinnieprince/HA-dashboard-app`
-4. Vernieuw de winkel en installeer **Ancient Home Assistant**.
-   De container wordt op je Pi gebouwd; er hoeft niets naar een containerregister
-   gepubliceerd te worden. De eerste installatie kan enkele minuten duren.
-5. Start de app, zet automatisch starten aan en open de webinterface.
-6. Open op de iPad `http://JOUW_HA_IP:8095`, bijvoorbeeld
-   `http://192.168.0.21:8095` als dat het adres van je HA-machine is.
-7. Vul in de Ancient-wizard het bereikbare HA-adres en een langlevend toegangstoken
-   van een afzonderlijke, niet-beheerder HA-gebruiker in. Gebruik een IP-adres of
-   DNS-naam die de app kan bereiken, niet `localhost`.
-8. Maak een eigen dashboardwachtwoord, kies entiteiten en sla de indeling op.
-9. Voeg de pagina via Safari toe aan het beginscherm en stel Begeleide toegang in.
+4. Refresh the store and install **Ancient Home Assistant**. Supervisor builds the
+   container on your device; publishing your own container image is not required.
+   The first installation may take several minutes.
+5. Ensure port 7654 is available. Stop Retro Panel or change its port if necessary.
+6. Start the app, enable start on boot, and open the web interface.
+7. On the iPad, open `http://YOUR_HA_IP:7654`.
+8. In the Ancient setup wizard, enter a reachable HA URL and a long-lived access
+   token from a dedicated non-admin Home Assistant user. Use an IP address or DNS
+   name reachable from the app, not `localhost`.
+9. Set a dashboard password, select entities, and save the layout.
+10. Use Safari's Add to Home Screen and configure Guided Access as needed.
 
-## Opslag, back-ups en updates
+## Updating from 0.1.0
 
-De database staat in `/data/dashboard/dashboard.sqlite3`. Supervisor bewaart `/data`
-bij herstarten en app-updates. Selecteer deze app in je HA-back-up. Verwijderen van
-de app kan de opslag verwijderen: maak eerst een back-up. Back-ups bevatten ook
-het HA-token en moeten vertrouwelijk blijven. De upstream app bewaart dit token
-op de server; het dashboardwachtwoord wordt gehasht opgeslagen.
+Make a Home Assistant backup that includes this app. Refresh the app store after
+publishing the new repository contents and update the existing app to **1.0.0**.
+Do not uninstall: the slug and data directory are unchanged.
 
-Deze versie gebruikt een vastgezette upstream-container. Nieuwe upstream-releases
-worden pas gebruikt wanneer deze repository expliciet wordt bijgewerkt. Verhoog
-bij elke gepubliceerde wijziging ook `version` in `config.yaml`.
+Home Assistant may preserve the existing external port. In the app's **Network**
+settings, change the host port for **8095/tcp** to **7654**, then restart the app.
+The internal application port stays 8095. Update the iPad's saved URL to port 7654.
+Verify that the existing connection and layout are still present after restarting.
 
-## Netwerk
+## Storage, backups and updates
 
-Poort 8095 is bedoeld voor je vertrouwde lokale netwerk. Stel geen port-forwarding
-in naar deze app. HTTP versleutelt het wachtwoord en sessieverkeer niet; gebruik
-voor toegang buiten je LAN een geschikte beveiligde oplossing. Ingress en een
-zijbalkpaneel zijn niet inbegrepen. De iPad opent de app rechtstreeks.
+The database lives at `/data/dashboard/dashboard.sqlite3`. Supervisor preserves
+`/data` across restarts and app updates. Include the app when creating a Home
+Assistant backup. Uninstalling may remove its storage: create a backup first.
+Backups contain the HA token and must remain private. The upstream app keeps the
+token on the server and stores a hash of the dashboard password.
 
-Bij een poortconflict kun je de externe poort in de netwerkopties wijzigen.
-Bewaar de interne poort 8095. Als je HA alleen via HTTPS van buitenaf opent, open
-het lokale HTTP-adres op de iPad zelf in plaats van de knop Webinterface.
+This release uses a pinned upstream container. Upstream changes are only adopted
+when this repository explicitly updates its image digest. Increase `version` in
+`config.yaml` for every published packaging update.
 
-## Eerste praktijktest
+## Network
 
-- App starten; logboek controleren op een succesvolle start.
-- Wizard voltooien en één sensor en één lamp toevoegen.
-- Pagina verversen en op de echte iPad testen.
-- App herstarten: verbinding en indeling moeten bewaard blijven.
-- HA-back-up maken en herstel eerst op een testinstallatie controleren.
+The default external port is **7654**, mapped to the internal port **8095**.
+The Web UI button follows the configured mapping. Keep internal port 8095 and
+change only the external mapping if you need a different host port.
 
-Bij problemen: deel de foutmelding uit het logboek, zonder tokens/wachtwoorden.
+Use the app on a trusted local network. Do not forward its port to the internet.
+HTTP does not encrypt passwords or session traffic. Ingress and a sidebar panel
+are not included; the iPad opens the app directly. If you access HA remotely over
+HTTPS, open the local dashboard address directly on the iPad.
+
+## Verification checklist
+
+- Start the app and check the log for successful startup.
+- Complete setup and add a sensor and a light.
+- Refresh the page and test on the actual iPad.
+- Restart the app: the connection and layout should persist.
+- Create a Home Assistant backup and verify restore on a test installation.
+
+When reporting errors, include relevant log messages without passwords or tokens.

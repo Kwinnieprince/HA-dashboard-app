@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.0
+
+- Promote the packaging to stable following confirmed Raspberry Pi 5 operation.
+- Change the default external port to 7654; keep internal port 8095.
+- Translate repository and installation documentation into English.
+- Document the port migration for existing installations and Retro Panel conflicts.
+- Keep the same app slug, persistent storage and pinned upstream application.
+
 ## 0.1.0
 
 - Initial experimental Home Assistant app packaging.
