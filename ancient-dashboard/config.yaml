@@ -1,5 +1,5 @@
 name: Ancient Home Assistant
-version: "1.0.0"
+version: "1.1.0"
 slug: ancient_dashboard
 description: Lightweight dashboard for older iPads, powered by Ancient Home Assistant.
 url: https://github.com/Kwinnieprince/HA-dashboard-app

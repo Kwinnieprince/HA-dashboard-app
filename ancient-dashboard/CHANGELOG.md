@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.0
+
+- Adopt the tested focus-mode image from kwintend on Docker Hub, pinned by digest.
+- Add per-browser Hide sidebar and Hide top bar preferences with a corner menu.
+- Keep port 7654, the existing app ID, and persistent dashboard storage unchanged.
+
 ## 1.0.0
 
 - Promote the packaging to stable following confirmed Raspberry Pi 5 operation.

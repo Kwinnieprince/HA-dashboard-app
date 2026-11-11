@@ -20,6 +20,18 @@ Initial installation and operation have been confirmed on Raspberry Pi 5.
 9. Set a dashboard password, select entities, and save the layout.
 10. Use Safari's Add to Home Screen and configure Guided Access as needed.
 
+## Updating from 1.0.0 to 1.1.0
+
+Create a backup that includes this app, refresh the app store, and update the
+existing app. Keep the same installation; no data migration is needed. Port 7654
+is unchanged. Reload Safari after the update and open **Settings → This browser**
+to enable **Hide sidebar** and **Hide top bar**. The corner button restores hidden
+navigation; edit mode temporarily shows the normal layout.
+
+The Docker Hub application image is pinned by digest. The test tag can move
+without changing this release. The separate focus-test app on port 7655 is not
+modified by updating this app.
+
 ## Updating from 0.1.0
 
 Make a Home Assistant backup that includes this app. Refresh the app store after

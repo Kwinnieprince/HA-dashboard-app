@@ -1,16 +1,17 @@
 # Upstream and maintenance
 
 - Project: https://github.com/leodenglovescode/ancienthomeassistant
-- Source commit: `77c998fc988795e6647160bced029f0f750152b4`
-- Published image tag: `ghcr.io/leodenglovescode/ancienthomeassistant:sha-77c998fc988795e6647160bced029f0f750152b4`
-- Multi-platform digest: `sha256:c3aa8fa5f2012779c41114a09ca5275ec2df37c4334b22f48fe02dfb5c12b011`
+- Image source: https://github.com/Kwinnieprince/ancienthomeassistant
+- Source commit: `f8d1756f9883a8e407f105320ec18a7c1fe8ed09`
+- Published image tag: `docker.io/kwintend/ancienthomeassistant:focus-test`
+- Multi-platform digest: `sha256:c814a4247e4d3504134389b761708fc9d8c87ce29d2c8d5fa4b428441066b49e`
 - Registry manifest verified to include `linux/arm64` and `linux/amd64`.
 
-No explicit LICENSE file was found in the upstream checkout at this commit.
-This repository therefore does not vendor the application source, assert a license
-for it, or publish rebuilt container images. It references the image published by
-its author. Confirm the author's licensing and contribution preferences before
-redistributing application code/images or opening an upstream packaging PR.
+The base application originates from the project above. This release uses the
+contributor's focus-mode fork and the image published to their Docker Hub account.
+The wrapper does not copy application source. The original project's licensing
+still needs clarification before a contribution is merged or further distribution
+arrangements are made.
 
 ## Updating
 
